@@ -15,7 +15,7 @@ function fetchNumber() {
 function* workerSaga() {
     try {
         const response = yield call(fetchNumber);
-        const output = response.data.message;
+        const output = response.data;
 
         yield put({ type: "SUCCESS", output });
 
