@@ -5,21 +5,27 @@ function Form(props) {
 
     const numberInput = useRef(null)
 
-    const { onRequestNumber } = props;
+    const { fetching, onRequestNumber } = props;
     return (
         <div>
             <label htmlFor="number">Insert a number</label>
             <br />
             <input name="number" type="number" defaultValue="23" ref={numberInput} />
             <br />
-            <button onClick={() => onRequestNumber(numberInput.current.value)}>Show info about this number</button>
+            {fetching ? (
+                <button disabled>Looking for fun facts...</button>
+            ) : (
+                    <button onClick={() => onRequestNumber(numberInput.current.value)}>Show info about this number</button>
+                )}
         </div>
     )
 }
 
 
 const mapStateToProps = state => {
-    return state
+    return {
+        fetching: state.fetching
+    }
 };
 
 const mapDispatchToProps = dispatch => {

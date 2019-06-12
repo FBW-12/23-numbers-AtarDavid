@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 class Output extends Component {
     render() {
-        const { fetching, output, error } = this.props
+        const { output, error } = this.props
         return (
             <>
                 <header className="header">
