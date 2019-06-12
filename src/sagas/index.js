@@ -5,16 +5,17 @@ export function* watcherSaga() {
     yield takeLatest("REQUEST", workerSaga);
 }
 
-function fetchNumber() {
+function fetchNumber(number) {
+    console.log(number)
     return axios({
         method: "get",
-        url: "https://numbers-api-proxy.dci-fbw121.now.sh/?number=23"
+        url: `https://numbers-api-proxy.dci-fbw121.now.sh/?number=${number}`
     });
 }
 
-function* workerSaga() {
+function* workerSaga(action) {
     try {
-        const response = yield call(fetchNumber);
+        const response = yield call(fetchNumber, action.number);
         const output = response.data;
 
         yield put({ type: "SUCCESS", output });
